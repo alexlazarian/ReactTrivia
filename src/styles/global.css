@@ -1,0 +1,82 @@
+:root {
+    --COLOR_PRIMARY: #065FB1;
+    --COLOR_PRIMARY_DARK: #045198;
+    --COLOR_PRIMARY_DARKER: #043E73;
+    --COLOR_PRIMARY_LIGHT: #E3F2FF;
+    --COLOR_PRIMARY_LIGHTER: #F4FAFF;
+    --COLOR_GREEN: #065927;
+    --COLOR_RED: #A01E1E;
+    --COLOR_BLACK: #2D2D2D;
+    --COLOR_GREY: #A0A0A0;
+    --COLOR_GREY_LIGHT: #D0D0D0;
+    --COLOR_GREY_LIGHTER: #F8F8F8;
+
+    --TYPE_H1: 36px;
+    --TYPE_H2: 20px;
+    --TYPE_BODY: 16px;
+    --TYPE_LABEL: 16px;
+
+    --FONT_DEFAULT: 'Roboto', 'Open Sans', sans-serif;
+}
+
+
+*,
+::after,
+::before {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	font-family: var(--FONT_DEFAULT);
+	font-weight: 400;
+	color: var(--COLOR_BLACK);
+	scroll-behavior: smooth;
+	font-size: var(--TYPE_BODY);
+	line-height: 1.5em;
+	overflow-x: hidden;
+}
+
+body {
+	position: relative;
+}
+
+img {
+	user-select: none;
+	pointer-events: none;
+}
+
+input {
+	font-family: var(--FONT_DEFAULT);
+    color: var(--COLOR_BLACK);
+}
+
+button {
+	font-family: var(--FONT_DEFAULT);
+    font-size: var(--TYPE_LABEL);
+    color: var(--COLOR_BLACK);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-family: var(--FONT_DEFAULT);
+}
+
+h1 {
+	font-size: var(--TYPE_H1);
+	line-height: 1.25em;
+}
+
+h2 {
+	font-size: var(--TYPE_H2);
+	line-height: 1.1em;
+}
+
+
+p {
+	font-size: var(--TYPE_BODY);
+	line-height: 1.55em;
+}
