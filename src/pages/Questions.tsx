@@ -7,7 +7,6 @@ import {useAppContext} from '../context/AppContext'
 import data from '../fixtures/data'
 import {getFormattedDate} from '../utils/formatTodayDate'
 
-
 function Questions() {
 	const [step, setStep] = useState(0)
 	const [errorMessage, setErrorMessage] = useState('')
@@ -71,16 +70,25 @@ function Questions() {
 		if (step === data.length - 1) {
 			if (score > highestScore) {
 				console.log('highest score', highestScore)
-				sessionStorage.setItem(STORAGE_KEYS.HIGHEST_SCORE, score.toString())
+				sessionStorage.setItem(
+					STORAGE_KEYS.HIGHEST_SCORE,
+					score.toString()
+				)
 				setHighestScore(score)
 
-				sessionStorage.setItem(STORAGE_KEYS.HIGHEST_SCORE_DATE, getFormattedDate())
+				sessionStorage.setItem(
+					STORAGE_KEYS.HIGHEST_SCORE_DATE,
+					getFormattedDate()
+				)
 				setHighestScoreDate(getFormattedDate())
 			} else {
 				console.log('not the highest score')
 			}
 
-			sessionStorage.setItem(STORAGE_KEYS.CURRENT_SCORE, score.toString())
+			sessionStorage.setItem(
+				STORAGE_KEYS.CURRENT_SCORE,
+				score.toString()
+			)
 			return navigate(ROUTES.RESULTS)
 		}
 
