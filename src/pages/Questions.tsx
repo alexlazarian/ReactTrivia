@@ -8,6 +8,8 @@ import data from '../fixtures/data'
 function Questions() {
 	const [step, setStep] = useState(0)
 	const [errorMessage, setErrorMessage] = useState('')
+	const [answerChecked, setAnswerChecked] = useState(false)
+	const [answerMatched, setAnswerMatched] = useState(false)
 
 	const {score, setScore} = useAppContext()
 
@@ -18,11 +20,10 @@ function Questions() {
 		setScore(0)
 	}, [])
 
-	const handleNextQuestion = e => {
+	const handleCheckAnswer = e => {
 		e.preventDefault()
-		setErrorMessage('')
 
-		if (step === data.length - 1) return navigate(ROUTES.RESULTS)
+		setErrorMessage('')
 
 		let selectedAnswerArr = []
 		const selectedAnswer = formRef.current
@@ -46,6 +47,19 @@ function Questions() {
 		if (selectedAnswerArr.length === 0)
 			return setErrorMessage('Please select an answer')
 
+		if (answersMatch) setAnswerMatched(true)
+		else setAnswerMatched(false)
+
+		setAnswerChecked(true)
+	}
+
+	const handleNextQuestion = e => {
+		e.preventDefault()
+
+		setAnswerChecked(false)
+
+		if (step === data.length - 1) return navigate(ROUTES.RESULTS)
+
 		setStep(step => step + 1)
 	}
 
@@ -54,7 +68,6 @@ function Questions() {
 			<p>Score: {score}</p>
 
 			<form ref={formRef}>
-
 				{
 					data.map(item => (
 						<li key={item.id}>
@@ -62,7 +75,6 @@ function Questions() {
 								Question {item.id} of {data.length}
 							</p>
 							<p>{item.question}</p>
-							{errorMessage && <p>{errorMessage}</p>}
 
 							{item.answers.map((answer, index) => (
 								<div key={index}>
@@ -84,7 +96,16 @@ function Questions() {
 					))[step]
 				}
 			</form>
-			<button onClick={handleNextQuestion}>Next Question</button>
+			{errorMessage && <p>{errorMessage}</p>}
+			{answerChecked && (
+				<p>{answerMatched ? 'Correct!' : 'Incorrect!'}</p>
+			)}
+
+			{answerChecked ? (
+				<button onClick={handleNextQuestion}>Next Question</button>
+			) : (
+				<button onClick={handleCheckAnswer}>Check Answer</button>
+			)}
 		</>
 	)
 }
