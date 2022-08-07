@@ -10,6 +10,7 @@
     --COLOR_GREY: #A0A0A0;
     --COLOR_GREY_LIGHT: #D0D0D0;
     --COLOR_GREY_LIGHTER: #F8F8F8;
+    --COLOR_WHITE: #ffffff;
 
     --TYPE_H1: 36px;
     --TYPE_H2: 20px;
@@ -68,6 +69,7 @@ h5 {
 h1 {
 	font-size: var(--TYPE_H1);
 	line-height: 1.25em;
+    font-weight: 500;
 }
 
 h2 {
