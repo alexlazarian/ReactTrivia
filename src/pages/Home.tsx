@@ -1,22 +1,30 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 
 import * as ROUTES from '../constants/routes'
 import {useAppContext} from '../context/AppContext'
 
 function Home() {
+	const [errorMessage, setErrorMessage] = useState('')
+
 	const {name, setName} = useAppContext()
 
 	const navigate = useNavigate()
 
 	const handleStart = e => {
 		e.preventDefault()
+		setErrorMessage('')
+
+		if (!name) return setErrorMessage('Please enter your name')
+
 		navigate(ROUTES.QUESTIONS)
 	}
 	return (
 		<>
 			<h1>FunTrivia</h1>
 			<p>Fun trivia game to test your IQ</p>
+			{errorMessage && <p>{errorMessage}</p>}
+
 			<form>
 				<input
 					type='text'

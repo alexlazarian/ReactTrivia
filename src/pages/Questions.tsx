@@ -7,6 +7,8 @@ import data from '../fixtures/data'
 
 function Questions() {
 	const [step, setStep] = useState(0)
+	const [errorMessage, setErrorMessage] = useState('')
+
 	const {score, setScore} = useAppContext()
 
 	const navigate = useNavigate()
@@ -18,6 +20,8 @@ function Questions() {
 
 	const handleNextQuestion = e => {
 		e.preventDefault()
+		setErrorMessage('')
+
 		if (step === data.length - 1) return navigate(ROUTES.RESULTS)
 
 		let selectedAnswerArr = []
@@ -39,14 +43,18 @@ function Questions() {
 
 		if (answersMatch) setScore(score => score + 1)
 
+		if (selectedAnswerArr.length === 0)
+			return setErrorMessage('Please select an answer')
+
 		setStep(step => step + 1)
 	}
 
 	return (
 		<>
-		    <p>Score: {score}</p>
+			<p>Score: {score}</p>
 
 			<form ref={formRef}>
+
 				{
 					data.map(item => (
 						<li key={item.id}>
@@ -54,6 +62,8 @@ function Questions() {
 								Question {item.id} of {data.length}
 							</p>
 							<p>{item.question}</p>
+							{errorMessage && <p>{errorMessage}</p>}
+
 							{item.answers.map((answer, index) => (
 								<div key={index}>
 									<input
