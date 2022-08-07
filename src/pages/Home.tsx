@@ -14,9 +14,7 @@ function Home() {
 	const handleStart = e => {
 		e.preventDefault()
 		setErrorMessage('')
-
-		if (!name) return setErrorMessage('Please enter your name')
-
+		
 		navigate(ROUTES.QUESTIONS)
 	}
 	return (
