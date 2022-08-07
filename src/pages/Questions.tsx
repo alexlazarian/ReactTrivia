@@ -28,7 +28,11 @@ function Questions() {
 							{item.answers.map((answer, index) => (
 								<div key={index}>
 									<input
-										type='radio'
+										type={
+											item.correctAnswerIndex.length > 1
+												? 'checkbox'
+												: 'radio'
+										}
 										id={answer}
 										name='answer'
 										value={answer}
