@@ -114,7 +114,10 @@ function Questions() {
 										value={answer}
 									/>
 
-									<label>{answer}</label>
+									<label>
+										{answer}{' '}
+										{answerChecked && item.correctAnswerIndex.includes(index) && ('(correct)')}
+									</label>
 								</div>
 							))}
 						</li>
