@@ -21,8 +21,10 @@ function Home() {
 	}
 	return (
 		<>
-			<h1>FunTrivia</h1>
-			<p>Fun trivia game to test your IQ</p>
+
+			<img src="icons/logo.svg" alt="trivia logo" />
+			<h1>Welcome to Trivia</h1>
+			<p>Play the ultimate online trivia quiz</p>
 			{errorMessage && <p>{errorMessage}</p>}
 
 			<form>
