@@ -6,6 +6,7 @@ import data from '../fixtures/data'
 
 function Questions() {
 	const [step, setStep] = useState(0)
+
 	const navigate = useNavigate()
 
 	const handleNextQuestion = e => {
@@ -17,16 +18,27 @@ function Questions() {
 	return (
 		<>
 			<form>
-				<div>Questions</div>
 				{
-					data.map((question, index) => {
-						return (
-							<div key={index}>
-								<div>{question.question}</div>
-								<div>{question.answers}</div>
-							</div>
-						)
-					})[step]
+					data.map(item => (
+						<li key={item.id}>
+							<p>
+								Question {item.id} of {data.length}
+							</p>
+							<p>{item.question}</p>
+							{item.answers.map((answer, index) => (
+								<div key={index}>
+									<input
+										type='radio'
+										id={answer}
+										name='answer'
+										value={answer}
+									/>
+
+									<label>{answer}</label>
+								</div>
+							))}
+						</li>
+					))[step]
 				}
 			</form>
 			<button onClick={handleNextQuestion}>Next Question</button>
