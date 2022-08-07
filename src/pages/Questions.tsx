@@ -2,8 +2,11 @@ import React, {useEffect, useRef, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 
 import * as ROUTES from '../constants/routes'
+import * as STORAGE_KEYS from '../constants/storageKeys'
 import {useAppContext} from '../context/AppContext'
 import data from '../fixtures/data'
+import {getFormattedDate} from '../utils/formatTodayDate'
+
 
 function Questions() {
 	const [step, setStep] = useState(0)
@@ -11,7 +14,13 @@ function Questions() {
 	const [answerChecked, setAnswerChecked] = useState(false)
 	const [answerMatched, setAnswerMatched] = useState(null)
 
-	const {score, setScore} = useAppContext()
+	const {
+		score,
+		setScore,
+		setHighestScore,
+		highestScore,
+		setHighestScoreDate,
+	} = useAppContext()
 
 	const navigate = useNavigate()
 	const formRef = useRef()
@@ -59,7 +68,21 @@ function Questions() {
 
 		setAnswerChecked(false)
 
-		if (step === data.length - 1) return navigate(ROUTES.RESULTS)
+		if (step === data.length - 1) {
+			if (score > highestScore) {
+				console.log('highest score', highestScore)
+				sessionStorage.setItem(STORAGE_KEYS.HIGHEST_SCORE, score.toString())
+				setHighestScore(score)
+
+				sessionStorage.setItem(STORAGE_KEYS.HIGHEST_SCORE_DATE, getFormattedDate())
+				setHighestScoreDate(getFormattedDate())
+			} else {
+				console.log('not the highest score')
+			}
+
+			sessionStorage.setItem(STORAGE_KEYS.CURRENT_SCORE, score.toString())
+			return navigate(ROUTES.RESULTS)
+		}
 
 		setStep(step => step + 1)
 	}
