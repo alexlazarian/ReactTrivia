@@ -9,7 +9,7 @@ function Questions() {
 	const [step, setStep] = useState(0)
 	const [errorMessage, setErrorMessage] = useState('')
 	const [answerChecked, setAnswerChecked] = useState(false)
-	const [answerMatched, setAnswerMatched] = useState(false)
+	const [answerMatched, setAnswerMatched] = useState(null)
 
 	const {score, setScore} = useAppContext()
 
@@ -24,6 +24,7 @@ function Questions() {
 		e.preventDefault()
 
 		setErrorMessage('')
+		setAnswerMatched(null)
 
 		let selectedAnswerArr = []
 		const selectedAnswer = formRef.current
@@ -79,6 +80,7 @@ function Questions() {
 							{item.answers.map((answer, index) => (
 								<div key={index}>
 									<input
+										disabled={answerChecked}
 										type={
 											item.correctAnswerIndex.length > 1
 												? 'checkbox'
@@ -98,7 +100,15 @@ function Questions() {
 			</form>
 			{errorMessage && <p>{errorMessage}</p>}
 			{answerChecked && (
-				<p>{answerMatched ? 'Correct!' : 'Incorrect!'}</p>
+				<p>
+					{
+						{
+							null: '',
+							true: 'Correct!',
+							false: 'Wrong!',
+						}[answerMatched]
+					}
+				</p>
 			)}
 
 			{answerChecked ? (
