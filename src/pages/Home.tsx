@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {
 	Button,
@@ -33,8 +33,8 @@ function Home() {
 		<PageContainer>
 			<Logo src='icons/logo.svg' alt='trivia logo' />
 			<Content>
-				<h1>Welcome to Trivia</h1>
-				<p>Play the ultimate online trivia quiz</p>
+				<h1 tabIndex={0}>Welcome to Trivia</h1>
+				<p tabIndex={1}>Play the ultimate online trivia quiz</p>
 			</Content>
 			<HomepageForm>
 				<InputField
@@ -42,9 +42,12 @@ function Home() {
 					name='name'
 					placeholder="What's your name?"
 					value={name}
+					tabIndex={2}
 					onChange={e => setName(e.target.value)}
 				/>
-				<Button onClick={handleStart}>Play game!</Button>
+				<Button tabIndex={3} onClick={handleStart}>
+					Play game!
+				</Button>
 			</HomepageForm>
 		</PageContainer>
 	)

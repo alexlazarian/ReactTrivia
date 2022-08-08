@@ -66,7 +66,7 @@ export const QuestionsContainer = styled.div`
 	gap: 16px;
 `
 
-export const QuestionItem = styled.p`
+export const QuestionItem = styled.div`
 	min-height: 50px;
 `
 
@@ -76,9 +76,9 @@ export const QuestionFooter = styled.div`
 	width: 100%;
 `
 
-export const InfoMessage = styled.p`
+export const InfoMessage = styled.div`
 	align-self: flex-start;
-	bottom: 25px;
+	top: -30px;
 	font-size: var(--TYPE_LABEL);
 	font-weight: 500;
 	margin-bottom: 24px;
@@ -109,7 +109,7 @@ export const AnswerContainer = styled.div`
 	}
 `
 
-export const AnswerItem = styled.div`
+export const AnswerItemLabel = styled.label`
 	align-items: center;
 	display: flex;
 	flex-direction: row;
@@ -172,9 +172,7 @@ export const AnswerItem = styled.div`
 			}
 		}
 	}
-`
 
-export const AnswerItemLabel = styled.label`
 	${({correctAnswer}) =>
 		correctAnswer && `color: var(--COLOR_GREEN);`}
 `
@@ -192,6 +190,16 @@ export const InputField = styled.input`
 
 	::placeholder {
 		color: var(--COLOR_GREY);
+	}
+`
+
+export const ButtonWrapper = styled.div`
+	position: relative;
+	display: flex;
+	gap: 10px;
+
+	@media (max-width: ${BREAK._379}) {
+		flex-direction: column;
 	}
 `
 
@@ -228,6 +236,21 @@ export const Button = styled.button`
 				&:hover {
 					opacity: 0.8;
 					background-color: var(--COLOR_WHITE);
+					color: var(--COLOR_PRIMARY);
+				}
+			`}
+
+	${({link}) =>
+		link &&
+		`
+				background-color: transparent;
+				border: none;
+				color: var(--COLOR_PRIMARY);
+
+				&:hover {
+					opacity: 0.8;
+					background-color: transparent;
+					border: none;
 					color: var(--COLOR_PRIMARY);
 				}
 			`}

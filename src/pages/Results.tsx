@@ -54,15 +54,17 @@ function Results() {
 			<Badge src='icons/badge.svg' alt='results graphic' />
 			{displayConfetti()}
 			<Content>
-				<h1>
+				<h1 tabIndex={0}>
 					{displayName()}
 					{displayScoreMessage()}
 				</h1>
-				<p>{displayScore()}</p>
-				<p>{displayHighestScoreMessage()}</p>
+				<p tabIndex={1}>{displayScore()}</p>
+				<p tabIndex={2}>{displayHighestScoreMessage()}</p>
 			</Content>
 
-			<Button onClick={handleRestart}>Play again!</Button>
+			<Button tabIndex={3} onClick={handleRestart}>
+				Play again!
+			</Button>
 		</PageContainer>
 	)
 }

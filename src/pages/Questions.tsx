@@ -1,10 +1,11 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+
 import {
 	AnswerContainer,
-	AnswerItem,
 	AnswerItemLabel,
 	Button,
+	ButtonWrapper,
 	InfoMessage,
 	PageContainer,
 	QuestionFooter,
@@ -22,7 +23,7 @@ import {getFormattedDate} from '../utils/formatTodayDate'
 
 function Questions() {
 	const [step, setStep] = useState(0)
-	const [errorMessage, setErrorMessage] = useState('')
+	const [errorMessage, setErrorMessage] = useState(false)
 	const [answerChecked, setAnswerChecked] = useState(false)
 	const [answerMatched, setAnswerMatched] = useState(null)
 
@@ -35,22 +36,34 @@ function Questions() {
 	} = useAppContext()
 
 	const navigate = useNavigate()
-	const formRef = useRef()
+	const formRef = useRef(null)
+	const questionRef = useRef(null)
 
 	useEffect(() => {
 		document.title = `Question ${data[step].id} of ${data.length}`
-
+		questionRef.current.focus()
 	}, [step])
 
 	useEffect(() => {
-
 		setScore(0)
 	}, [])
+
+	const handleUncheckAll = e => {
+		e.preventDefault()
+		const selectedAnswer = formRef.current
+
+		for (let index = 0; index < selectedAnswer.length; index++) {
+			// @ts-ignore
+			console.log(selectedAnswer[index].checked)
+			// @ts-ignore
+			selectedAnswer[index].checked = false
+		}
+	}
 
 	const handleCheckAnswer = e => {
 		e.preventDefault()
 
-		setErrorMessage('')
+		setErrorMessage(false)
 		setAnswerMatched(null)
 
 		let selectedAnswerArr = []
@@ -72,8 +85,7 @@ function Questions() {
 
 		if (answersMatch) setScore(score => score + 1)
 
-		if (selectedAnswerArr.length === 0)
-			return setErrorMessage('Please select an answer')
+		if (selectedAnswerArr.length === 0) return setErrorMessage(true)
 
 		if (answersMatch) setAnswerMatched(true)
 		else setAnswerMatched(false)
@@ -117,7 +129,7 @@ function Questions() {
 	return (
 		<PageContainer>
 			<QuestionsHeader>
-				<h2>
+				<h2 tabIndex={1}>
 					Question {data[step].id} of {data.length}
 				</h2>
 				<h2>Score: {score}</h2>
@@ -127,11 +139,20 @@ function Questions() {
 				{
 					data.map(item => (
 						<QuestionsContainer key={item.id}>
-							<QuestionItem>{item.question}</QuestionItem>
+							<QuestionItem tabIndex={2} ref={questionRef}>
+								{item.question}
+							</QuestionItem>
 
 							<AnswerContainer>
 								{item.answers.map((answer, index) => (
-									<AnswerItem key={index}>
+									<AnswerItemLabel
+										key={index}
+										correctAnswer={
+											answerChecked &&
+											item.correctAnswerIndex.includes(index)
+										}
+										tabIndex={index + 3}
+									>
 										<input
 											disabled={answerChecked}
 											type={
@@ -142,20 +163,13 @@ function Questions() {
 											id={answer}
 											name='answer'
 											value={answer}
+											tabIndex={index + 3}
 										/>
-
-										<AnswerItemLabel
-											correctAnswer={
-												answerChecked &&
-												item.correctAnswerIndex.includes(index)
-											}
-										>
-											{answer}{' '}
-											{answerChecked &&
-												item.correctAnswerIndex.includes(index) &&
-												'(correct)'}
-										</AnswerItemLabel>
-									</AnswerItem>
+										{answer}{' '}
+										{answerChecked &&
+											item.correctAnswerIndex.includes(index) &&
+											'(correct)'}
+									</AnswerItemLabel>
 								))}
 							</AnswerContainer>
 						</QuestionsContainer>
@@ -165,7 +179,9 @@ function Questions() {
 
 			<QuestionFooter>
 				{errorMessage && (
-					<InfoMessage type={'error'}>{errorMessage}</InfoMessage>
+					<InfoMessage type={'error'}>
+						Please select an answer
+					</InfoMessage>
 				)}
 				{answerChecked && (
 					<>
@@ -184,11 +200,20 @@ function Questions() {
 				)}
 
 				{answerChecked ? (
-					<Button onClick={handleNextQuestion}>Next Question</Button>
+					<ButtonWrapper>
+						<Button tabIndex={0} onClick={handleNextQuestion}>
+							Next Question
+						</Button>
+					</ButtonWrapper>
 				) : (
-					<Button outline onClick={handleCheckAnswer}>
-						Check Answer
-					</Button>
+					<ButtonWrapper>
+						<Button tabIndex={0} outline onClick={handleCheckAnswer}>
+							Check Answer
+						</Button>
+						<Button tabIndex={0} link onClick={handleUncheckAll}>
+							Unselect All
+						</Button>
+					</ButtonWrapper>
 				)}
 			</QuestionFooter>
 		</PageContainer>
