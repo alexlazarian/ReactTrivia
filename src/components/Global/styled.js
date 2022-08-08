@@ -2,24 +2,24 @@ import styled from 'styled-components'
 import * as BREAK from '../../constants/breakpoints'
 
 export const PageContainer = styled.article`
+	align-items: center;
 	background-color: var(--COLOR_WHITE);
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	justify-content: flex-start;
-	padding: 60px 20px 20px 20px;
-	max-width: 820px;
 	margin: auto;
+	max-width: 820px;
+	padding: 60px 20px 20px 20px;
 `
 
 export const Logo = styled.img`
-	width: 200px;
 	margin-bottom: 20px;
+	width: 200px;
 `
 
 export const Badge = styled.img`
-	width: 200px;
 	margin-bottom: 20px;
+	width: 200px;
 `
 
 export const Content = styled.div`
@@ -31,8 +31,8 @@ export const Content = styled.div`
 `
 
 export const HomepageForm = styled.form`
-	gap: 10px;
 	display: flex;
+	gap: 10px;
 
 	@media (max-width: ${BREAK._768}) {
 		flex-direction: column;
@@ -42,17 +42,17 @@ export const HomepageForm = styled.form`
 export const QuestionsHeader = styled.div`
 	display: flex;
 	flex-direction: row;
-	width: 100%;
 	justify-content: space-between;
 	margin-bottom: 16px;
+	width: 100%;
 `
 
 export const QuestionsForm = styled.form`
 	display: flex;
 	flex-direction: column;
-	width: 100%;
 	justify-content: space-between;
 	margin-bottom: 20px;
+	width: 100%;
 `
 
 export const QuestionsContainer = styled.div`
@@ -66,18 +66,18 @@ export const QuestionItem = styled.p`
 `
 
 export const QuestionFooter = styled.div`
-	position: relative;
 	align-self: flex-start;
+	position: relative;
 	width: 100%;
 `
 
 export const InfoMessage = styled.p`
-	position: absolute;
+	align-self: flex-start;
 	bottom: 25px;
 	font-size: var(--TYPE_LABEL);
 	font-weight: 500;
-	align-self: flex-start;
 	margin-bottom: 24px;
+	position: absolute;
 
 	${({type}) => {
 		switch (type) {
@@ -92,10 +92,10 @@ export const InfoMessage = styled.p`
 `
 
 export const AnswerContainer = styled.div`
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 16px;
 	align-items: center;
+	display: grid;
+	gap: 16px;
+	grid-template-columns: 1fr 1fr;
 	justify-content: center;
 	margin-bottom: 24px;
 
@@ -105,65 +105,65 @@ export const AnswerContainer = styled.div`
 `
 
 export const AnswerItem = styled.div`
+	align-items: center;
 	display: flex;
 	flex-direction: row;
+	gap: 12px;
 	height: max-content;
 	min-height: 30px;
-	gap: 12px;
-	align-items: center;
 
 	& [type='radio'] {
-		cursor: pointer;
+		align-items: center;
 		appearance: none;
 		background-color: #fff;
+		border-radius: 50%;
+		border: 1px solid var(--COLOR_GREY_LIGHT);
+		cursor: pointer;
+		display: flex;
+		flex-shrink: 0;
+		height: 24px;
+		justify-content: center;
 		margin: 0;
 		width: 24px;
-		height: 24px;
-		border: 1px solid var(--COLOR_GREY_LIGHT);
-		border-radius: 50%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-shrink: 0;
 
 		:checked {
 			border: 1px solid var(--COLOR_PRIMARY);
 			&::before {
-				flex-shrink: 0;
+				background-color: var(--COLOR_PRIMARY);
+				border-radius: 50%;
 				content: '';
 				display: block;
-				width: 16px;
+				flex-shrink: 0;
 				height: 16px;
-				border-radius: 50%;
-				background-color: var(--COLOR_PRIMARY);
+				width: 16px;
 			}
 		}
 	}
 
 	& [type='checkbox'] {
-		cursor: pointer;
+		align-items: center;
 		appearance: none;
 		background-color: #fff;
+		border-radius: 20%;
+		border: 1px solid var(--COLOR_GREY_LIGHT);
+		cursor: pointer;
+		display: flex;
+		flex-shrink: 0;
+		height: 24px;
+		justify-content: center;
 		margin: 0;
 		width: 24px;
-		height: 24px;
-		border: 1px solid var(--COLOR_GREY_LIGHT);
-		border-radius: 20%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-shrink: 0;
 
 		:checked {
 			border: 1px solid var(--COLOR_PRIMARY);
 			&::before {
-				flex-shrink: 0;
+				background-color: var(--COLOR_PRIMARY);
+				border-radius: 20%;
 				content: '';
 				display: block;
-				width: 16px;
+				flex-shrink: 0;
 				height: 16px;
-				border-radius: 20%;
-				background-color: var(--COLOR_PRIMARY);
+				width: 16px;
 			}
 		}
 	}
@@ -176,13 +176,13 @@ export const AnswerItemLabel = styled.label`
 
 export const InputField = styled.input`
 	background-color: var(--COLOR_GREY_LIGHTER);
-	border: 1px var(--COLOR_GREY_LIGHT) solid;
-	outline: 0;
 	border-radius: 8px;
-	height: 44px;
-	padding: 0px 20px;
+	border: 1px var(--COLOR_GREY_LIGHT) solid;
 	font-size: var(--TYPE_BODY);
+	height: 44px;
 	min-width: 220px;
+	outline: 0;
+	padding: 0px 20px;
 
 	::placeholder {
 		color: var(--COLOR_GREY);
@@ -190,17 +190,17 @@ export const InputField = styled.input`
 `
 
 export const Button = styled.button`
-	display: flex;
-	background-color: var(--COLOR_PRIMARY);
-	color: var(--COLOR_WHITE);
-	padding: 10px 24px;
-	border-radius: 8px;
-	min-height: 44px;
 	align-items: center;
-	font-weight: 500;
+	background-color: var(--COLOR_PRIMARY);
+	border-radius: 8px;
+	color: var(--COLOR_WHITE);
+	display: flex;
 	font-size: var(--TYPE_LABEL);
+	font-weight: 500;
 	justify-content: center;
+	min-height: 44px;
 	opacity: 1;
+	padding: 10px 24px;
 
 	&:hover {
 		background-color: var(--COLOR_PRIMARY_DARK);
