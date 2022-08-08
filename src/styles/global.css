@@ -75,6 +75,7 @@ h1 {
 h2 {
 	font-size: var(--TYPE_H2);
 	line-height: 1.1em;
+    font-weight: 500;
 }
 
 

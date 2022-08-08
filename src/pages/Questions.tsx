@@ -1,5 +1,18 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import {
+	AnswerContainer,
+	AnswerItem,
+	AnswerItemLabel,
+	Button,
+	InfoMessage,
+	PageContainer,
+	QuestionFooter,
+	QuestionItem,
+	QuestionsContainer,
+	QuestionsForm,
+	QuestionsHeader,
+} from '../components/Global/styled'
 
 import * as ROUTES from '../constants/routes'
 import * as STORAGE_KEYS from '../constants/storageKeys'
@@ -96,61 +109,83 @@ function Questions() {
 	}
 
 	return (
-		<>
-			<p>Score: {score}</p>
+		<PageContainer>
+			<QuestionsHeader>
+				<h2>
+					Question {data[step].id} of {data.length}
+				</h2>
+				<h2>Score: {score}</h2>
+			</QuestionsHeader>
 
-			<form ref={formRef}>
+			<QuestionsForm ref={formRef}>
 				{
 					data.map(item => (
-						<li key={item.id}>
-							<p>
-								Question {item.id} of {data.length}
-							</p>
-							<p>{item.question}</p>
+						<QuestionsContainer key={item.id}>
+							<QuestionItem>{item.question}</QuestionItem>
 
-							{item.answers.map((answer, index) => (
-								<div key={index}>
-									<input
-										disabled={answerChecked}
-										type={
-											item.correctAnswerIndex.length > 1
-												? 'checkbox'
-												: 'radio'
-										}
-										id={answer}
-										name='answer'
-										value={answer}
-									/>
+							<AnswerContainer>
+								{item.answers.map((answer, index) => (
+									<AnswerItem key={index}>
+										<input
+											disabled={answerChecked}
+											type={
+												item.correctAnswerIndex.length > 1
+													? 'checkbox'
+													: 'radio'
+											}
+											id={answer}
+											name='answer'
+											value={answer}
+										/>
 
-									<label>
-										{answer}{' '}
-										{answerChecked && item.correctAnswerIndex.includes(index) && ('(correct)')}
-									</label>
-								</div>
-							))}
-						</li>
+										<AnswerItemLabel
+											correctAnswer={
+												answerChecked &&
+												item.correctAnswerIndex.includes(index)
+											}
+										>
+											{answer}{' '}
+											{answerChecked &&
+												item.correctAnswerIndex.includes(index) &&
+												'(correct answer)'}
+										</AnswerItemLabel>
+									</AnswerItem>
+								))}
+							</AnswerContainer>
+						</QuestionsContainer>
 					))[step]
 				}
-			</form>
-			{errorMessage && <p>{errorMessage}</p>}
-			{answerChecked && (
-				<p>
-					{
-						{
-							null: '',
-							true: 'Correct!',
-							false: 'Wrong!',
-						}[answerMatched]
-					}
-				</p>
-			)}
+			</QuestionsForm>
 
-			{answerChecked ? (
-				<button onClick={handleNextQuestion}>Next Question</button>
-			) : (
-				<button onClick={handleCheckAnswer}>Check Answer</button>
-			)}
-		</>
+			<QuestionFooter>
+				{errorMessage && (
+					<InfoMessage type={'error'}>{errorMessage}</InfoMessage>
+				)}
+				{answerChecked && (
+					<>
+						{
+							{
+								null: '',
+								true: (
+									<InfoMessage type={'success'}>Correct!</InfoMessage>
+								),
+								false: (
+									<InfoMessage type={'error'}>Wrong!</InfoMessage>
+								),
+							}[answerMatched]
+						}
+					</>
+				)}
+
+				{answerChecked ? (
+					<Button onClick={handleNextQuestion}>Next Question</Button>
+				) : (
+					<Button outline onClick={handleCheckAnswer}>
+						Check Answer
+					</Button>
+				)}
+			</QuestionFooter>
+		</PageContainer>
 	)
 }
 
