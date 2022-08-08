@@ -10,6 +10,7 @@ import {
 } from '../components/Global/styled'
 
 import * as ROUTES from '../constants/routes'
+import * as STORAGE_KEYS from '../constants/storageKeys'
 import {useAppContext} from '../context/AppContext'
 
 function Home() {
@@ -21,8 +22,8 @@ function Home() {
 
 	const handleStart = e => {
 		e.preventDefault()
-		setErrorMessage('')
 
+		sessionStorage.setItem(STORAGE_KEYS.NAME, name)
 		navigate(ROUTES.QUESTIONS)
 	}
 	return (

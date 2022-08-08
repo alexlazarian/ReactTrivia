@@ -25,8 +25,9 @@ const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
   const highestScoreDateSessionStorage = sessionStorage.getItem(STORAGE_KEYS.HIGHEST_SCORE_DATE) ||'';
   const currentScoreSessionStorage = sessionStorage.getItem(STORAGE_KEYS.CURRENT_SCORE) ||'0';
   const parsedCurrentScore = parseInt(currentScoreSessionStorage);
+  const nameSessionStorage = sessionStorage.getItem(STORAGE_KEYS.NAME) ||'';
 
-  const [name, setName] = useState<string>("");
+  const [name, setName] = useState<string>(nameSessionStorage);
   const [score, setScore] = useState<number>(parsedCurrentScore);
   const [highestScore, setHighestScore] = useState<number>(parsedHighestScore);
   const [highestScoreDate, setHighestScoreDate] = useState<string>(highestScoreDateSessionStorage);

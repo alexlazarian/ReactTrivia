@@ -1,3 +1,4 @@
 export const HIGHEST_SCORE = 'HIGHEST_SCORE'
 export const HIGHEST_SCORE_DATE = 'HIGHEST_SCORE_DATE'
 export const CURRENT_SCORE = 'CURRENT_SCORE'
+export const NAME = 'NAME'
