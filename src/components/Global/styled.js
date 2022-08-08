@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import * as BREAK from '../../constants/breakpoints'
 
 export const PageContainer = styled.article`
 	background-color: var(--COLOR_WHITE);
@@ -32,6 +33,10 @@ export const Content = styled.div`
 export const HomepageForm = styled.form`
 	gap: 10px;
 	display: flex;
+
+	@media (max-width: ${BREAK._768}) {
+		flex-direction: column;
+	}
 `
 
 export const QuestionsHeader = styled.div`
@@ -93,6 +98,10 @@ export const AnswerContainer = styled.div`
 	align-items: center;
 	justify-content: center;
 	margin-bottom: 24px;
+
+	@media (max-width: ${BREAK._768}) {
+		grid-template-columns: 1fr;
+	}
 `
 
 export const AnswerItem = styled.div`
@@ -190,6 +199,7 @@ export const Button = styled.button`
 	align-items: center;
 	font-weight: 500;
 	font-size: var(--TYPE_LABEL);
+	justify-content: center;
 	opacity: 1;
 
 	&:hover {
