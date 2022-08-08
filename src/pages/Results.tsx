@@ -8,7 +8,7 @@ import {
 	Button,
 	Content,
 	PageContainer,
-} from '../components/Global/styled'
+} from '../styles/styled'
 import * as ROUTES from '../constants/routes'
 import * as STORAGE_KEYS from '../constants/storageKeys'
 import {useAppContext} from '../context/AppContext'

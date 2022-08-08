@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import * as BREAK from '../../constants/breakpoints'
+import styled, {createGlobalStyle, css} from 'styled-components'
+import * as BREAK from '../constants/breakpoints'
 
 export const PageContainer = styled.article`
 	align-items: center;
@@ -14,12 +14,14 @@ export const PageContainer = styled.article`
 
 export const Logo = styled.img`
 	margin-bottom: 20px;
-	width: 200px;
+	max-width: 200px;
+	width: 100%;
 `
 
 export const Badge = styled.img`
 	margin-bottom: 20px;
-	width: 200px;
+	max-width: 200px;
+	width: 100%;
 `
 
 export const Content = styled.div`
@@ -33,8 +35,11 @@ export const Content = styled.div`
 export const HomepageForm = styled.form`
 	display: flex;
 	gap: 10px;
+	width: 100%;
+	justify-content: center;
 
-	@media (max-width: ${BREAK._768}) {
+	@media (max-width: ${BREAK._379}) {
+		align-items: center;
 		flex-direction: column;
 	}
 `
@@ -180,9 +185,10 @@ export const InputField = styled.input`
 	border: 1px var(--COLOR_GREY_LIGHT) solid;
 	font-size: var(--TYPE_BODY);
 	height: 44px;
-	min-width: 220px;
+	max-width: 220px;
 	outline: 0;
 	padding: 0px 20px;
+	width: 100%;
 
 	::placeholder {
 		color: var(--COLOR_GREY);
@@ -226,3 +232,29 @@ export const Button = styled.button`
 				}
 			`}
 `
+
+const typeSizesBreakpoint1 = css`
+	--TYPE_H1: 36px;
+	--TYPE_H2: 20px;
+	--TYPE_BODY: 16px;
+	--TYPE_LABEL: 16px;
+`
+
+const typeSizesBreakpoint2 = css`
+	--TYPE_H1: 20px;
+	--TYPE_H2: 16px;
+	--TYPE_BODY: 14px;
+	--TYPE_LABEL: 14px;
+`
+
+const SystemTheme = createGlobalStyle`
+  :root {
+	${typeSizesBreakpoint1}
+
+	@media (max-width: 420px) {
+		${typeSizesBreakpoint2}
+	}
+
+  }`
+
+export default SystemTheme

@@ -12,7 +12,7 @@ import {
 	QuestionsContainer,
 	QuestionsForm,
 	QuestionsHeader,
-} from '../components/Global/styled'
+} from '../styles/styled'
 
 import * as ROUTES from '../constants/routes'
 import * as STORAGE_KEYS from '../constants/storageKeys'
@@ -147,7 +147,7 @@ function Questions() {
 											{answer}{' '}
 											{answerChecked &&
 												item.correctAnswerIndex.includes(index) &&
-												'(correct answer)'}
+												'(correct)'}
 										</AnswerItemLabel>
 									</AnswerItem>
 								))}
