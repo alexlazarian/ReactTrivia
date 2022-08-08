@@ -1,3 +1,7 @@
+# Preview
+
+![preview](https://user-images.githubusercontent.com/34932547/183357804-f95320cb-ea2d-4525-b69c-e3b956de67ad.gif)
+
 # Trivia game
 
 You have been assigned a new trivia game prototype. Your task is to build a fully functional experience that meets the requirements below.
