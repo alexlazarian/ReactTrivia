@@ -1,6 +1,14 @@
 import React from 'react'
 import {useNavigate} from 'react-router-dom'
+import FireworksConfetti from '../components/Confetti/Fireworks'
+import RealisticConfetti from '../components/Confetti/Realistic'
 
+import {
+	Badge,
+	Button,
+	Content,
+	PageContainer,
+} from '../components/Global/styled'
 import * as ROUTES from '../constants/routes'
 import * as STORAGE_KEYS from '../constants/storageKeys'
 import {useAppContext} from '../context/AppContext'
@@ -24,25 +32,39 @@ function Results() {
 		`You got ${score} out of ${data.length} questions right!`
 
 	const displayScoreMessage = (): string =>
-		score < 5 ? 'Better luck next time!' : 'You’re a Trivia master!!'
+		score < 4
+			? 'Better luck next time!'
+			: score < 5
+			? `You're getting there, keep up!`
+			: 'You’re a Trivia master!'
 
 	const displayHighestScoreMessage = (): string =>
 		highestScore
 			? `Your best score so far was ${highestScore} out of ${data.length} questions which you got on ${highestScoreDate}.`
 			: `You don't have a high score yet, play to get a score`
 
-	return (
-		<>
-			<img src='' alt='results graphic' />
-			<p>
-				{displayName()}
-				{displayScoreMessage()}
-			</p>
-			<p>{displayScore()}</p>
-			<p>{displayHighestScoreMessage()}</p>
+	const displayConfetti = () =>
+		score < 4 ? (
+			<RealisticConfetti />
+		) : (
+			<FireworksConfetti durationUntilStop={5000} />
+		)
 
-			<button onClick={handleRestart}>Play again!</button>
-		</>
+	return (
+		<PageContainer>
+			<Badge src='icons/badge.svg' alt='results graphic' />
+			{displayConfetti()}
+			<Content>
+				<h1>
+					{displayName()}
+					{displayScoreMessage()}
+				</h1>
+				<p>{displayScore()}</p>
+				<p>{displayHighestScoreMessage()}</p>
+			</Content>
+
+			<Button onClick={handleRestart}>Play again!</Button>
+		</PageContainer>
 	)
 }
 

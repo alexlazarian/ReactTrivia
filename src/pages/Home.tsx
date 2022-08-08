@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {
 	Button,
-	HomepageContent,
+	Content,
 	HomepageForm,
 	InputField,
 	Logo,
@@ -14,7 +14,6 @@ import * as STORAGE_KEYS from '../constants/storageKeys'
 import {useAppContext} from '../context/AppContext'
 
 function Home() {
-	const [errorMessage, setErrorMessage] = useState('')
 
 	const {name, setName} = useAppContext()
 
@@ -29,10 +28,10 @@ function Home() {
 	return (
 		<PageContainer>
 			<Logo src='icons/logo.svg' alt='trivia logo' />
-			<HomepageContent>
+			<Content>
 				<h1>Welcome to Trivia</h1>
 				<p>Play the ultimate online trivia quiz</p>
-			</HomepageContent>
+			</Content>
 			<HomepageForm>
 				<InputField
 					type='text'

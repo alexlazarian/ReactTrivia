@@ -17,10 +17,15 @@ export const Logo = styled.img`
 	margin-bottom: 20px;
 `
 
-export const HomepageContent = styled.div`
+export const Badge = styled.img`
+	width: 200px;
+	margin-bottom: 20px;
+`
+
+export const Content = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 15px;
 	margin-bottom: 20px;
 	text-align: center;
 `
@@ -43,7 +48,7 @@ export const QuestionsForm = styled.form`
 	flex-direction: column;
 	width: 100%;
 	justify-content: space-between;
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 `
 
 export const QuestionsContainer = styled.div`
@@ -186,7 +191,6 @@ export const Button = styled.button`
 	align-items: center;
 	font-weight: 500;
 	font-size: var(--TYPE_LABEL);
-	align-self: flex-start;
 	opacity: 1;
 
 	&:hover {
