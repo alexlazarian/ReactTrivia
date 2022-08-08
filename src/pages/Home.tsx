@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {
 	Button,
@@ -14,7 +14,6 @@ import * as STORAGE_KEYS from '../constants/storageKeys'
 import {useAppContext} from '../context/AppContext'
 
 function Home() {
-
 	const {name, setName} = useAppContext()
 
 	const navigate = useNavigate()
@@ -25,6 +24,11 @@ function Home() {
 		sessionStorage.setItem(STORAGE_KEYS.NAME, name)
 		navigate(ROUTES.QUESTIONS)
 	}
+
+	useEffect(() => {
+		document.title = `Home - Trivia`
+	}, [])
+
 	return (
 		<PageContainer>
 			<Logo src='icons/logo.svg' alt='trivia logo' />

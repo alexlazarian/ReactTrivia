@@ -1,14 +1,9 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import FireworksConfetti from '../components/Confetti/Fireworks'
 import RealisticConfetti from '../components/Confetti/Realistic'
 
-import {
-	Badge,
-	Button,
-	Content,
-	PageContainer,
-} from '../styles/styled'
+import {Badge, Button, Content, PageContainer} from '../styles/styled'
 import * as ROUTES from '../constants/routes'
 import * as STORAGE_KEYS from '../constants/storageKeys'
 import {useAppContext} from '../context/AppContext'
@@ -49,6 +44,10 @@ function Results() {
 		) : (
 			<FireworksConfetti durationUntilStop={5000} />
 		)
+
+	useEffect(() => {
+		document.title = name ? `${name}'s Results` : 'Results - Trivia'
+	}, [])
 
 	return (
 		<PageContainer>

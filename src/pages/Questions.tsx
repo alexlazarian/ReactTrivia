@@ -38,6 +38,12 @@ function Questions() {
 	const formRef = useRef()
 
 	useEffect(() => {
+		document.title = `Question ${data[step].id} of ${data.length}`
+
+	}, [step])
+
+	useEffect(() => {
+
 		setScore(0)
 	}, [])
 
